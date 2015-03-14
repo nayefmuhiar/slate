@@ -3,12 +3,12 @@ title: API Reference
 
 language_tabs:
   - shell
-  - ruby
-  - python
 
 toc_footers:
-  - <a href='#'>Sign Up for a Developer Key</a>
-  - <a href='http://github.com/tripit/slate'>Documentation Powered by Slate</a>
+  - <a href="#"> Eon access API </a>
+  - <a href="#">Buttercloud</a>
+
+
 
 includes:
   - errors
@@ -18,67 +18,38 @@ search: true
 
 # Introduction
 
-Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.
-
-We have language bindings in Shell, Ruby, and Python! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
-
-This example API documentation page was created with [Slate](http://github.com/tripit/slate). Feel free to edit it and use it as a base for your own API's documentation.
+  EON API
 
 # Authentication
 
 > To authorize, use this code:
 
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-```
-
 ```shell
 # With shell, you can just pass the correct header with each request
 curl "api_endpoint_here"
-  -H "Authorization: meowmeowmeow"
+  -H "Authorization: APIKEY"
 ```
 
-> Make sure to replace `meowmeowmeow` with your API key.
 
-Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our [developer portal](http://example.com/developers).
 
-Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:
+Eon Access expects for the API key to be included in all API requests to the server in a header that looks like the following:
 
-`Authorization: meowmeowmeow`
+`Authorization: APIKEY`
 
 <aside class="notice">
-You must replace `meowmeowmeow` with your personal API key.
+You must replace `APIKEY` with your personal API key.
 </aside>
 
-# Kittens
+# Cases
 
-## Get All Kittens
+## Get All Cases
+filter by status
+available statuses(:pending_conversion, ..etc)
 
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get()
-```
 
 ```shell
-curl "http://example.com/api/kittens"
-  -H "Authorization: meowmeowmeow"
+curl "http://access.eonaligner.com/api/cases"
+  -H "Authorization: APIKEY"
 ```
 
 > The above command returns JSON structured like this:
@@ -86,83 +57,211 @@ curl "http://example.com/api/kittens"
 ```json
 [
   {
-    "id": 1,
-    "name": "Fluffums",
-    "breed": "calico",
-    "fluffiness": 6,
-    "cuteness": 7
+    "id": "integer",
+    "case_type": "string",
+    "created_at": "datetime",
+    "updated_at": "datetime",
+    "status": "string",
+    "uid": "string"
   },
   {
-    "id": 2,
-    "name": "Isis",
-    "breed": "unknown",
-    "fluffiness": 5,
-    "cuteness": 10
+    "id": "integer",
+    "case_type": "string",
+    "created_at": "datetime",
+    "updated_at": "datetime",
+    "status": "string",
+    "uid": "string"
   }
 ]
 ```
 
-This endpoint retrieves all kittens.
+This endpoint retrieves all Cases.
 
 ### HTTP Request
 
-`GET http://example.com/kittens`
+`GET http://access.eonaligner.com/api/cases`
 
 ### Query Parameters
 
 Parameter | Default | Description
 --------- | ------- | -----------
-include_cats | false | If set to true, the result will also include cats.
-available | true | If set to false, the result will include kittens that have already been adopted.
+filter | none | If set to one of the allowed filters, returns cases with status equal to the filter.
+
 
 <aside class="success">
-Remember — a happy kitten is an authenticated kitten!
+Remember — Authentication is required!
 </aside>
 
-## Get a Specific Kitten
+## Get a specific Case
 
-```ruby
-require 'kittn'
+This enpoint takes a flag to return latest active treatment setup id along with the case.
 
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get(2)
-```
 
 ```shell
-curl "http://example.com/api/kittens/3"
-  -H "Authorization: meowmeowmeow"
+curl "http://access.eonaligner.com/api/cases/3.json"
+  -H "Authorization: APIKEY"
 ```
 
 > The above command returns JSON structured like this:
 
 ```json
 {
-  "id": 2,
-  "name": "Isis",
-  "breed": "unknown",
-  "fluffiness": 5,
-  "cuteness": 10
+  "id": "integer",
+  "case_type": "string",
+  "clinical_findings": "hstore",
+  "treatment_goals": "hstore",
+  "treatment_summary": "text",
+  "special_instructions": "text",
+  "created_at": "datetime",
+  "updated_at": "datetime",
+  "status": "string",
+  "step": "string",
+  "uid": "string",
+  "notes": "string",
+  "upper_steps": "integer",
+  "lower_steps": "integer",
+  "steps_per_stage": "string",
+  "ipr_file_name": "string",
+  "ipr_content_type": "string",
+  "ipr_file_size": "integer",
+  "sps_file_name": "string",
+  "sps_content_type": "string",
+  "sps_file_size": "integer",
+  "anterior": "string",
+  "posterior": "string",
+  "irregularities": "string",
+  "severity": "string",
+  "ts_notes": "text"
 }
 ```
 
-This endpoint retrieves a specific kitten.
+This endpoint retrieves a specific Case.
 
-<aside class="warning">If you're not using an administrator API key, note that some kittens will return 403 Forbidden if they are hidden for admins only.</aside>
 
 ### HTTP Request
 
-`GET http://example.com/kittens/<ID>`
+`GET http://access.eonaligner.com/cases/<ID>`
 
 ### URL Parameters
 
 Parameter | Description
 --------- | -----------
-ID | The ID of the cat to retrieve
+ID | The ID of the case to retreive
 
+<aside class="success">
+Remember — Authentication is required!
+</aside>
+
+
+## Get a specfic Treatment Setup
+
+```shell
+curl "http://access.eonaligner.com/api/cases/id/treatment_setups"
+  -H "Authorization: APIKEY"
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "id": "integer",
+  "version": "integer",
+  "case_id": "integer",
+  "created_at": "datetime",
+  "updated_at": "datetime",
+  "title": "string",
+  "legacy_id": "string",
+  "state": "string",
+  "sps_file_name": "string",
+  "sps_content_type": "string",
+  "sps_file_size": "integer",
+  "ipr_file_name": "string",
+  "ipr_content_type": "string",
+  "ipr_file_size": "integer",
+  "ts_notes": "text",
+  "notes": "text",
+  "activated_at": "datetime"
+}
+```
+
+This endpoint retrieves a specfic Treatment Setup.
+
+### HTTP Request
+
+`GET http://access.eonaligner.com/api/cases/id/treatment_setups`
+
+### Query Parameters
+
+Parameter | Description
+--------- | -----------
+None | None
+
+<aside class="success">
+Remember — Authentication is required!
+</aside>
+
+
+
+## Update Treatment Setup
+
+Alberto can decide what format the teeth movements are sent.
+
+```shell
+curl "http://access.eonaligner.com/api/cases/id/treatment_setups/id"
+  -H "Authorization: APIKEY"
+```
+
+> The above command returns JSON structured like this:
+
+```json
+
+    [ 
+      {
+        "1": {
+        "rotation_degree": null,
+        "translation_mm": 2,
+        "torque_degree": null,
+        "tipping_degree": null,
+        "ipr_amount_mm": null,
+        "ipr_at_step": null,
+        "attachement_placement": true,
+        "attachement_placement_at_step": 4,
+        "attachement_removal_at_step": 9,
+        "extraction": true,
+        "pontic": false
+        }
+      },
+
+      {
+        "2": {
+        "rotation_degree": null,
+        "translation_mm": 2,
+        "torque_degree": null,
+        "tipping_degree": null,
+        "ipr_amount_mm": null,
+        "ipr_at_step": null,
+        "attachement_placement": true,
+        "attachement_placement_at_step": 4,
+        "attachement_removal_at_step": 9,
+        "extraction": false,
+        "pontic": true
+        }
+      }
+    ]
+```
+
+This endpoint updates Treatment Setup
+
+### HTTP Request
+
+`GET http://access.eonaligner.com/api/cases/id/treatment_setups/id`
+
+### Query Parameters
+
+Parameter | Description
+--------- | -----------
+None | None
+
+<aside class="success">
+Remember — Authentication is required!
+</aside>
