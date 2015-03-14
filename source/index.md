@@ -98,7 +98,7 @@ This enpoint takes a flag to return latest active treatment setup id along with 
 
 
 ```shell
-curl "http://access.eonaligner.com/api/cases/3.json"
+curl "http://access.eonaligner.com/api/cases/3"
   -H "Authorization: APIKEY"
 ```
 
