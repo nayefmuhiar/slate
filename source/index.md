@@ -18,7 +18,10 @@ search: true
 
 # Introduction
 
-  EON API
+  This API is designed to work with Eon Converter and Eon viewer, it supports recieveing and sending of data related to cases and treatment setups.
+  The API is still under construction and changes might occur at any time, major changes will also increase the versin of the API.
+
+  Current API version: 1.0
 
 # Authentication
 
@@ -29,8 +32,6 @@ search: true
 curl "api_endpoint_here"
   -H "Authorization: APIKEY"
 ```
-
-
 
 Eon Access expects for the API key to be included in all API requests to the server in a header that looks like the following:
 
@@ -43,8 +44,11 @@ You must replace `APIKEY` with your personal API key.
 # Cases
 
 ## Get All Cases
-filter by status
-available statuses(:pending_conversion, ..etc)
+You can filter cases by status.
+
+A list of available statuses:
+
+1- pending_conversion.
 
 
 ```shell
@@ -75,7 +79,7 @@ curl "http://access.eonaligner.com/api/cases"
 ]
 ```
 
-This endpoint retrieves all Cases.
+This endpoint retrieves all Cases in eon access.
 
 ### HTTP Request
 
@@ -94,11 +98,11 @@ Remember — Authentication is required!
 
 ## Get a specific Case
 
-This enpoint takes a flag to return latest active treatment setup id along with the case.
+This endpoint takes a flag to return latest active treatment setup id along with the case.
 
 
 ```shell
-curl "http://access.eonaligner.com/api/cases/3"
+curl "http://access.eonaligner.com/cases/<ID>"
   -H "Authorization: APIKEY"
 ```
 
@@ -156,7 +160,7 @@ Remember — Authentication is required!
 ## Get a specfic Treatment Setup
 
 ```shell
-curl "http://access.eonaligner.com/api/cases/id/treatment_setups"
+curl "http://access.eonaligner.com/api/cases/<CASE_ID>/treatment_setups"
   -H "Authorization: APIKEY"
 ```
 
@@ -188,13 +192,13 @@ This endpoint retrieves a specfic Treatment Setup.
 
 ### HTTP Request
 
-`GET http://access.eonaligner.com/api/cases/id/treatment_setups`
+`GET http://access.eonaligner.com/api/cases/<CASE_ID>/treatment_setups`
 
 ### Query Parameters
 
 Parameter | Description
 --------- | -----------
-None | None
+CASE_ID | The ID of the case in which treatment setups are retrieved for
 
 <aside class="success">
 Remember — Authentication is required!
@@ -207,7 +211,7 @@ Remember — Authentication is required!
 Alberto can decide what format the teeth movements are sent.
 
 ```shell
-curl "http://access.eonaligner.com/api/cases/id/treatment_setups/id"
+curl "http://access.eonaligner.com/api/cases/<CASE_ID>/treatment_setups/<TS_ID>"
   -H "Authorization: APIKEY"
 ```
 
@@ -254,13 +258,15 @@ This endpoint updates Treatment Setup
 
 ### HTTP Request
 
-`GET http://access.eonaligner.com/api/cases/id/treatment_setups/id`
+`GET http://access.eonaligner.com/api/cases/<CASE_ID>/treatment_setups/<TS_ID>`
 
 ### Query Parameters
 
 Parameter | Description
 --------- | -----------
-None | None
+CASE_ID | The ID of the case
+TS_ID | The ID of the treatment setup to retreive
+
 
 <aside class="success">
 Remember — Authentication is required!
