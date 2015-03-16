@@ -52,7 +52,7 @@ A list of available statuses:
 
 
 ```shell
-curl "http://access.eonaligner.com/api/cases"
+curl "http://access.eonaligner.com/api/v1/cases"
   -H "Authorization: APIKEY"
 ```
 
@@ -83,7 +83,7 @@ This endpoint retrieves all Cases in eon access.
 
 ### HTTP Request
 
-`GET http://access.eonaligner.com/api/cases`
+`GET http://access.eonaligner.com/api/v1/cases`
 
 ### Query Parameters
 
@@ -102,7 +102,7 @@ This endpoint takes a flag to return latest active treatment setup id along with
 
 
 ```shell
-curl "http://access.eonaligner.com/cases/1887"
+curl "http://access.eonaligner.com/api/v1/cases/1887"
   -H "Authorization: APIKEY"
 ```
 
@@ -144,7 +144,7 @@ This endpoint retrieves a specific Case.
 
 ### HTTP Request
 
-`GET http://access.eonaligner.com/cases/:case_id`
+`GET http://access.eonaligner.com/api/v1/cases/:case_id`
 
 ### URL Parameters
 
@@ -160,7 +160,7 @@ Remember — Authentication is required!
 ## Get a specfic Treatment Setup
 
 ```shell
-curl "http://access.eonaligner.com/api/cases/:case_id/treatment_setups"
+curl "http://access.eonaligner.com/api/v1/cases/:case_id/treatment_setups"
   -H "Authorization: APIKEY"
 ```
 
@@ -211,7 +211,7 @@ This endpoint retrieves a specfic Treatment Setup.
 
 ### HTTP Request
 
-`GET http://access.eonaligner.com/api/cases/:case_id/treatment_setups`
+`GET http://access.eonaligner.com/api/v1/cases/:case_id/treatment_setups`
 
 ### Query Parameters
 
@@ -230,7 +230,7 @@ Remember — Authentication is required!
 Alberto can decide what format the teeth movements are sent.
 
 ```shell
-curl -X POST -H "Content-Type: application/json" "http://access.eonaligner.com/api/cases/:case_id/treatment_setups/:ts_id" 
+curl -X POST -H "Content-Type: application/json" "http://access.eonaligner.com/api/v1/cases/:case_id/treatment_setups/:ts_id" 
 -H "Authorization: APIKEY" -d 
 '{
      "teeth_movement": 
@@ -336,7 +336,7 @@ This endpoint updates Treatment Setup
 
 ### HTTP Request
 
-`GET http://access.eonaligner.com/api/cases/:case_id/treatment_setups/:ts_id`
+`POST http://access.eonaligner.com/api/v1/cases/:case_id/treatment_setups/:ts_id` -d
 
 ### Query Parameters
 
