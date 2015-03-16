@@ -30,12 +30,12 @@ search: true
 ```shell
 # With shell, you can just pass the correct header with each request
 curl "api_endpoint_here"
-  -H "Authorization: APIKEY"
+  -H "Authorization:Token token=APIKEY"
 ```
 
 Eon Access expects for the API key to be included in all API requests to the server in a header that looks like the following:
 
-`Authorization: APIKEY`
+`Authorization:Token token=APIKEY`
 
 <aside class="notice">
 You must replace `APIKEY` with your personal API key.
@@ -53,7 +53,7 @@ A list of available statuses:
 
 ```shell
 curl "http://access.eonaligner.com/api/v1/cases"
-  -H "Authorization: APIKEY"
+  -H "Authorization:Token token=APIKEY"
 ```
 
 > The above command returns JSON structured like this:
@@ -103,7 +103,7 @@ This endpoint takes a flag to return latest active treatment setup id along with
 
 ```shell
 curl "http://access.eonaligner.com/api/v1/cases/1887"
-  -H "Authorization: APIKEY"
+  -H "Authorization:Token token=APIKEY"
 ```
 
 > The above command returns JSON structured like this:
@@ -161,7 +161,7 @@ Remember — Authentication is required!
 
 ```shell
 curl "http://access.eonaligner.com/api/v1/cases/:case_id/treatment_setups"
-  -H "Authorization: APIKEY"
+  -H "Authorization:Token token=APIKEY"
 ```
 
 > The above command returns JSON structured like this:
@@ -231,7 +231,7 @@ Alberto can decide what format the teeth movements are sent.
 
 ```shell
 curl -X POST -H "Content-Type: application/json" "http://access.eonaligner.com/api/v1/cases/:case_id/treatment_setups/:ts_id" 
--H "Authorization: APIKEY" -d 
+-H "Authorization:Token token=APIKEY" -d 
 '{
      "teeth_movement": 
      [ 
